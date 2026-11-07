@@ -1,0 +1,5 @@
+<template><div class="card max-w-md mx-auto space-y-4"><h1 class="text-2xl font-bold">Sign in</h1><form @submit.prevent="submit" class="space-y-4"><div><label>Email</label><input type="email" v-model.trim="email" required autocomplete="email"/></div><div><label>Password</label><input type="password" v-model="password" required autocomplete="current-password"/></div><p v-if="error" role="alert" class="error">{{error}}</p><button class="btn w-full" :disabled="busy">{{busy?'Please wait…':'Sign in'}}</button></form><p>New here? <NuxtLink to="/auth/register" class="text-red-800 underline">Create an account</NuxtLink></p></div></template>
+<script setup lang="ts">
+const client=useSupabaseClient();const email=ref(''),password=ref(''),error=ref(''),busy=ref(false)
+async function submit(){busy.value=true;error.value='';try{const {error:e}=await client.auth.signInWithPassword({email:email.value,password:password.value});if(e)throw e;await navigateTo('/recipes')}catch(e:any){error.value=e.message||'Unable to sign in'}finally{busy.value=false}}
+</script>

@@ -1,0 +1,6 @@
+{
+ "name":"my-recipe-vault","private":true,"type":"module",
+ "scripts":{"dev":"nuxt dev","build":"nuxt build","preview":"nuxt preview","postinstall":"nuxt prepare"},
+ "dependencies":{"nuxt":"^4.2.0","@nuxtjs/supabase":"^2.0.0","@nuxtjs/tailwindcss":"^6.14.0","@supabase/supabase-js":"^2.80.0"},
+ "devDependencies":{"typescript":"^5.9.0"}
+}

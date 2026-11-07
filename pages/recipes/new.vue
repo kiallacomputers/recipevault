@@ -1,0 +1,1 @@
+<template><div class="space-y-5"><NuxtLink to="/recipes" class="text-red-800">← My Recipes</NuxtLink><h1 class="text-3xl font-bold">Add Recipe</h1><RecipeEditor @saved="id=>navigateTo(`/recipes/${id}`)"/></div></template><script setup lang="ts">definePageMeta({middleware:'auth'})</script>

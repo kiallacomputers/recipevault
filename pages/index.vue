@@ -1,0 +1,1 @@
+<template><div class="max-w-3xl mx-auto text-center py-20"><h1 class="text-5xl font-bold text-stone-900 mb-5">Your recipes. Your memories. Your kitchen.</h1><p class="text-xl text-stone-600 mb-8">Build your personal cookbook today. Friends and family collaboration is coming soon.</p><NuxtLink class="btn" to="/recipes">Open My Cookbook</NuxtLink></div></template>
