@@ -1,1 +1,2 @@
-<template><div class="space-y-5"><NuxtLink to="/recipes" class="text-red-800">← My Recipes</NuxtLink><h1 class="text-3xl font-bold">Add Recipe</h1><RecipeEditor @saved="id=>navigateTo(`/recipes/${id}`)"/></div></template><script setup lang="ts">definePageMeta({middleware:'auth'})</script>
+<template><div class="space-y-5"><NuxtLink to="/recipes" class="text-blue-600">← My Recipes</NuxtLink><div class="flex flex-wrap justify-between items-center gap-3"><h1 class="text-3xl font-bold">Add Recipe</h1><NuxtLink to="/recipes/import" class="btn btn-secondary">Import from Website</NuxtLink></div><RecipeEditor @saved="id=>navigateTo(`/recipes/${id}`)"/></div></template>
+<script setup lang="ts">definePageMeta({middleware:'auth'})</script>
