@@ -18,15 +18,15 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --rv-bg: #151719;
-  --rv-surface: #202326;
-  --rv-muted-surface: #2c3034;
-  --rv-text: #f5f3ef;
-  --rv-muted: #c0bdb8;
-  --rv-border: #464a4e;
+  --rv-bg: #0b1628;
+  --rv-surface: #14243b;
+  --rv-muted-surface: #1d304b;
+  --rv-text: #f2f6ff;
+  --rv-muted: #b5c5db;
+  --rv-border: #344b69;
   --rv-accent: #d65a48;
-  --rv-accent-text: #ffa394;
-  --rv-error: #ff9b9b;
+  --rv-accent-text: #ffb2a6;
+  --rv-error: #ffaaaa;
 }
 html, body, #__nuxt { min-height: 100%; background: var(--rv-bg); color: var(--rv-text); }
 input, textarea, select {
