@@ -10,8 +10,8 @@
   --rv-text: #292524;
   --rv-muted: #57534e;
   --rv-border: #d6d3d1;
-  --rv-accent: #b8392c;
-  --rv-accent-text: #7c2d22;
+  --rv-accent: #2563eb;
+  --rv-accent-text: #1d4ed8;
   --rv-error: #b91c1c;
   background: var(--rv-bg);
   color: var(--rv-text);
@@ -24,8 +24,8 @@
   --rv-text: #f2f6ff;
   --rv-muted: #b5c5db;
   --rv-border: #344b69;
-  --rv-accent: #d65a48;
-  --rv-accent-text: #ffb2a6;
+  --rv-accent: #3b82f6;
+  --rv-accent-text: #93c5fd;
   --rv-error: #ffaaaa;
 }
 html, body, #__nuxt { min-height: 100%; background: var(--rv-bg); color: var(--rv-text); }
@@ -74,3 +74,14 @@ label { display: block; font-size: .875rem; font-weight: 600; margin-bottom: .3r
 @media (prefers-reduced-motion: no-preference) {
   body, header, .card, input, textarea, select, .theme-toggle { transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
 }
+
+/* Compatibility for older hard-coded red primary buttons.
+   These selectors deliberately do not change red validation/error text. */
+.bg-red-600, .bg-red-700, .bg-red-800,
+:root[data-theme="dark"] .bg-red-600,
+:root[data-theme="dark"] .bg-red-700,
+:root[data-theme="dark"] .bg-red-800 { background-color: var(--rv-accent) !important; }
+.hover\:bg-red-700:hover, .hover\:bg-red-800:hover { background-color: #1d4ed8 !important; }
+:root[data-theme="dark"] .hover\:bg-red-700:hover,
+:root[data-theme="dark"] .hover\:bg-red-800:hover { background-color: #2563eb !important; }
+:root[data-theme="dark"] .text-red-800 { color: var(--rv-accent-text) !important; }
