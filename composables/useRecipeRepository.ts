@@ -38,9 +38,9 @@ export function useRecipeRepository() {
 
   async function get(id: string) {
     const recipeId = requireRecipeId(id)
-    const ownerId = await requireUser()
+    await requireUser()
     const { data, error } = await client.from('recipes').select('*')
-      .eq('id', recipeId).eq('owner_id', ownerId).single()
+      .eq('id', recipeId).single()
     if (error) throw error
     const [ingredients, steps] = await Promise.all([
       client.from('recipe_ingredients').select('*').eq('recipe_id', recipeId).order('position'),

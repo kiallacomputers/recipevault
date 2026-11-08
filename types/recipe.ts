@@ -1,4 +1,4 @@
-export type Visibility = 'private'|'friends'|'public'
+export type Visibility = 'private'|'friends'|'selected'|'public'
 export interface Ingredient { id?:string; position:number; quantity:number|null; unit:string; name:string; notes:string }
 export interface Step { id?:string; position:number; instruction:string }
 export interface Recipe {

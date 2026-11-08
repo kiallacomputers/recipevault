@@ -6,6 +6,9 @@
         <nav class="flex flex-wrap items-center gap-4 text-sm" aria-label="Main navigation">
           <NuxtLink to="/recipes">My Recipes</NuxtLink>
           <NuxtLink to="/recipes/new">Add Recipe</NuxtLink>
+          <NuxtLink v-if="user" to="/friends/recipes">Friends Recipes</NuxtLink>
+          <NuxtLink v-if="user" to="/discover">Discover</NuxtLink>
+          <NuxtLink v-if="user" to="/saved">Saved</NuxtLink>
           <template v-if="user">
             <NuxtLink to="/friends">Friends</NuxtLink>
             <NuxtLink to="/profile">My Profile</NuxtLink>
