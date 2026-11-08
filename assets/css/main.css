@@ -1,11 +1,76 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-:root{font-family:Inter,ui-sans-serif,system-ui,sans-serif;color:#292524;background:#fffaf4}
-input,textarea,select{border:1px solid #d6d3d1;border-radius:.65rem;padding:.65rem .8rem;background:white;width:100%}
-label{display:block;font-size:.875rem;font-weight:600;margin-bottom:.3rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:.65rem;padding:.65rem 1rem;font-weight:650;background:#b8392c;color:white;cursor:pointer}
-.btn:disabled{opacity:.5;cursor:not-allowed}
-.btn-secondary{background:white;color:#7c2d22;border:1px solid #d6d3d1}
-.card{background:white;border:1px solid #e7e5e4;border-radius:1rem;padding:1.25rem}
-.error{color:#b91c1c;font-size:.9rem}
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  color-scheme: light;
+  --rv-bg: #fffaf4;
+  --rv-surface: #ffffff;
+  --rv-muted-surface: #f5f5f4;
+  --rv-text: #292524;
+  --rv-muted: #57534e;
+  --rv-border: #d6d3d1;
+  --rv-accent: #b8392c;
+  --rv-accent-text: #7c2d22;
+  --rv-error: #b91c1c;
+  background: var(--rv-bg);
+  color: var(--rv-text);
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --rv-bg: #151719;
+  --rv-surface: #202326;
+  --rv-muted-surface: #2c3034;
+  --rv-text: #f5f3ef;
+  --rv-muted: #c0bdb8;
+  --rv-border: #464a4e;
+  --rv-accent: #d65a48;
+  --rv-accent-text: #ffa394;
+  --rv-error: #ff9b9b;
+}
+html, body, #__nuxt { min-height: 100%; background: var(--rv-bg); color: var(--rv-text); }
+input, textarea, select {
+  border: 1px solid var(--rv-border);
+  border-radius: .65rem;
+  padding: .65rem .8rem;
+  background: var(--rv-surface);
+  color: var(--rv-text);
+  width: 100%;
+}
+input::placeholder, textarea::placeholder { color: var(--rv-muted); opacity: .85; }
+label { display: block; font-size: .875rem; font-weight: 600; margin-bottom: .3rem; }
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: .65rem; padding: .65rem 1rem; font-weight: 650; background: var(--rv-accent); color: white; cursor: pointer; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-secondary { background: var(--rv-surface); color: var(--rv-accent-text); border: 1px solid var(--rv-border); }
+.card { background: var(--rv-surface); border: 1px solid var(--rv-border); border-radius: 1rem; padding: 1.25rem; }
+.error { color: var(--rv-error); font-size: .9rem; }
+.theme-toggle { display: inline-flex; align-items: center; gap: .4rem; padding: .4rem .7rem; border: 1px solid var(--rv-border); border-radius: .65rem; background: var(--rv-surface); color: var(--rv-text); font-weight: 600; }
+.theme-toggle:hover { background: var(--rv-muted-surface); }
+:focus-visible { outline: 2px solid var(--rv-accent); outline-offset: 3px; }
+/* Override the hard-coded light-mode Tailwind utilities used in Phase 1/2A. */
+:root[data-theme="dark"] .bg-white { background-color: var(--rv-surface) !important; }
+:root[data-theme="dark"] .bg-stone-50,
+:root[data-theme="dark"] .bg-stone-100,
+:root[data-theme="dark"] .bg-gray-50,
+:root[data-theme="dark"] .bg-gray-100 { background-color: var(--rv-muted-surface) !important; }
+:root[data-theme="dark"] .border-stone-100,
+:root[data-theme="dark"] .border-stone-200,
+:root[data-theme="dark"] .border-stone-300,
+:root[data-theme="dark"] .border-gray-200,
+:root[data-theme="dark"] .border-gray-300 { border-color: var(--rv-border) !important; }
+:root[data-theme="dark"] .text-stone-400,
+:root[data-theme="dark"] .text-stone-500,
+:root[data-theme="dark"] .text-stone-600,
+:root[data-theme="dark"] .text-stone-700,
+:root[data-theme="dark"] .text-gray-500,
+:root[data-theme="dark"] .text-gray-600 { color: var(--rv-muted) !important; }
+:root[data-theme="dark"] .text-red-800 { color: var(--rv-accent-text) !important; }
+:root[data-theme="dark"] .text-green-700 { color: #86efac !important; }
+:root[data-theme="dark"] .text-stone-900,
+:root[data-theme="dark"] .text-gray-900,
+:root[data-theme="dark"] .text-black { color: var(--rv-text) !important; }
+:root[data-theme="dark"] .btn { color: white; }
+:root[data-theme="dark"] .btn-secondary { color: var(--rv-accent-text); }
+@media (prefers-reduced-motion: no-preference) {
+  body, header, .card, input, textarea, select, .theme-toggle { transition: background-color .18s ease, color .18s ease, border-color .18s ease; }
+}
