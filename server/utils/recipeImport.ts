@@ -41,6 +41,7 @@ export async function fetchRecipeHtml(input: string): Promise<string> {
       current = new URL(target, url).toString()
       continue
     }
+    if (response.status === 403 || response.status === 429) throw bad('This website blocks automated imports. Use the Paste Recipe Text tab to copy the recipe from your browser.')
     if (!response.ok) throw bad(`Website returned HTTP ${response.status}.`)
     if (!/^(text\/html|application\/xhtml\+xml)(;|$)/i.test(response.headers.get('content-type') || '')) throw bad('This URL does not return an HTML recipe page.')
     if (Number(response.headers.get('content-length') || 0) > MAX_BYTES) throw bad('The recipe page is too large.')
@@ -123,4 +124,32 @@ export function parseRecipeHtml(html: string, sourceUrl: string) {
     }
   }
   throw bad('No supported structured recipe was found. Try another recipe page or enter it manually.')
+}
+
+
+/** Conservative plain-text extraction. Users must review the resulting draft. */
+export function parsePastedRecipe(input: string, sourceUrl = '') {
+  const lines = input.replace(/\r/g, '').split('\n').map(x => x.trim()).filter(Boolean)
+  if (lines.length < 3) throw bad('Paste the recipe title, ingredients and instructions (at least three lines).')
+  const heading = (line: string) => /^(ingredients?|directions?|instructions?|method|steps?|preparation)\s*:?(?:\s*)$/i.test(line)
+  const ingredientHeader = (line: string) => /^ingredients?\s*:?$/i.test(line)
+  const instructionHeader = (line: string) => /^(directions?|instructions?|method|steps?|preparation)\s*:?$/i.test(line)
+  const title = lines[0].slice(0, 160)
+  const ingredients: string[] = [], instructions: string[] = []
+  let section: 'none'|'ingredients'|'instructions' = 'none'
+  for (const line of lines.slice(1)) {
+    if (ingredientHeader(line)) { section = 'ingredients'; continue }
+    if (instructionHeader(line)) { section = 'instructions'; continue }
+    if (heading(line)) continue
+    const cleaned = line.replace(/^(?:[-*•]\s*|\d+[.)]\s+)/, '').trim()
+    if (!cleaned) continue
+    if (section === 'ingredients') ingredients.push(cleaned.slice(0, 200))
+    else if (section === 'instructions') instructions.push(cleaned.slice(0, 5000))
+  }
+  if (!ingredients.length || !instructions.length) throw bad('Add Ingredients and Instructions headings, with at least one item under each. See the example on the page.')
+  return {
+    sourceUrl, title, description: '', category: 'Other', servings: 4, prep_minutes: 0, cook_minutes: 0,
+    ingredients: ingredients.slice(0, 200).map((name, position) => ({ position, quantity: null, unit: '', name, notes: '' })),
+    steps: instructions.slice(0, 100).map((instruction, position) => ({ position, instruction }))
+  }
 }
